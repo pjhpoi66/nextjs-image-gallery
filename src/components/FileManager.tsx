@@ -1,6 +1,6 @@
 "use client";
 
-import {useState, useCallback} from 'react';
+import {useState, useEffect, useCallback} from 'react';
 import {Image as ImageType} from '@prisma/client';
 import ImagePreviewModal from './ImagePreviewModal';
 
@@ -27,6 +27,10 @@ export default function FileManager({initialFolders}: { initialFolders: string[]
   const [items, setItems] = useState<Item[]>(initialFolders.map(f => ({type: 'folder', name: f})));
   const [selectedImage, setSelectedImage] = useState<ImageType | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    fetchRootFolders();
+  }, []);
 
   const fetchFolderContents = useCallback(async (folderName: string) => {
     setIsLoading(true);
