@@ -4,6 +4,14 @@ import fs from 'fs/promises';
 import path from 'path';
 import prisma from '@/lib/prisma';
 
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '10mb', // 여기에서 원하는 최대 파일 크기를 설정합니다 (예: 10MB).
+    },
+  },
+};
+
 export async function POST(request: Request) {
 
   /**
